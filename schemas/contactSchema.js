@@ -13,9 +13,7 @@ const contactPostSchema = (req, res, next) => {
 
     if (error) {
         return res.status(400).json({
-            status: "error",
-            code: 400,
-            message: "missing required name field",
+            status: error.details[0].message,
         });
     }
     next();
@@ -35,9 +33,7 @@ const contactPutSchema = (req, res, next) => {
 
     if (error) {
         return res.status(400).json({
-            status: "error",
-            code: 400,
-            message: "missing fields",
+            status: error.details[0].message,
         });
     }
     next();
