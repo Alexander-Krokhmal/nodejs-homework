@@ -10,11 +10,7 @@ const getContactsController = async (req, res) => {
     try {
         const data = await listContacts();
 
-        res.json({
-            status: "success",
-            code: 200,
-            data,
-        });
+        res.json(data);
     } catch (error) {
         // next(error);
         res.status(500).json({
@@ -31,12 +27,11 @@ const getContactByIdController = async (req, res) => {
         const data = await getContactById(contactId);
 
         if (!data) {
-            res.status.json(404)({
+            return res.status(400).json({
                 status: "error",
-                code: 404,
-                messge: `Contact with id ${contactId} not found`,
-            });
-            return;
+                code: 400,
+                message: `Contact with id ${contactId} not found`,
+            });            
         }
 
         res.json({
@@ -78,16 +73,14 @@ const postContactController = async (req, res) => {
 const deleteContactController = async (req, res) => {
     try {
         const { contactId } = req.params;
-        const data = await removeContact(contactId);
-
-        if (!data) {
+        const searchContact = await getContactById(contactId);
+        if (!searchContact) {
             return res.status(404).json({
-                status: "error",
-                code: 404,
-                message: "Not Found",
+                message: `There is no contact with id ${contactId} to delete`,
             });
         }
-
+        
+        const data = await removeContact(contactId);
         res.status(200).json({
             status: "success",
             code: 200,
