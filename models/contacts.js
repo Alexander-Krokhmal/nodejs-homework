@@ -33,19 +33,20 @@ const removeContact = async (contactId) => {
     return isInList;
 }
 
-const addContact = async (body) => {
-  const { name, email, phone } = body;
+const addContact = async (name, email, phone) => {
+  // const { name, email, phone } = body;
   const newContact = { name, email, phone, id: uid(10) };
 
   const data = await fs.readFile(contactsPath, "utf8");
   const contacts = JSON.parse(data);
 
-  const newContacts = [...contacts, newContact];
-  await fs.writeFile(contactsPath, JSON.stringify(newContacts, null, 4), "utf8");
-  const newData = await fs.readFile(contactsPath, "utf8");
+  // const newContacts = [...contacts, newContact];
+  contacts.push(newContact);
+  await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 4), "utf8");
+  // const newData = await fs.readFile(contactsPath, "utf8");
 
-  const currentContact = JSON.parse(newData).find(({ id }) => id === newContact.id);
-  return currentContact;
+  // const currentContact = JSON.parse(newData).find(({ id }) => id === newContact.id);
+  return newContact;
 };
 
 const updateContact = async (contactId, body) => {

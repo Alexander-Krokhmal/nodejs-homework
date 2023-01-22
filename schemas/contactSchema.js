@@ -3,7 +3,7 @@ const Joi = require("joi");
 const contactPostSchema = (req, res, next) => {
     const schema = Joi.object({
         name: Joi.string().min(4).max(30).required(),
-        phone: Joi.string().required(),
+        phone: Joi.string().min(8).max(99).required(),
         email: Joi.string().email({
             minDomainSegments: 2,
         }).required(),
