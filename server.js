@@ -1,4 +1,4 @@
-const { connectMongo } = require("./db");
+const { connectMongo } = require("./db/connectMongo");
 require("dotenv").config();
 
 const app = require('./app');
