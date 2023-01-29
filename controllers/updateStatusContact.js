@@ -1,28 +1,22 @@
 const { Contact } = require("../db/contactModel");
 
-const updateStatusContact = async (req, res) => {
+const updateStatusContact = async (req, res, next) => {
     const { contactId } = req.params;
+    const { favorite } = req.body;
     
-        const result = await Contact.findOneAndUpdate(
+        const result = await Contact.findByIdAndUpdate(
             { _id: contactId },
-            { $set: req.body }
+            { favorite },
+            { new: true }
         );
-        const updateContact = await Contact.findOne({ _id: contactId });
     
         if (!result) {
             return res.status(404).json({
-                status: "error",
-                code: 404,
                 message: "Not Found",
             });
         }
     
-        res.status(200).json({
-            status: "success",
-            code: 200,
-            updateContact,
-            message: `Contact ${updateContact.name} was successfully changed`,
-        })
+    res.status(200).json(result);
     
 };
 
