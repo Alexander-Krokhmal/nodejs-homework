@@ -1,15 +1,17 @@
 const express = require('express');
+
 const { getAllContacts, getContactById, addContact, deleteContact, updateContact, updateStatusContact } = require('../../controllers');
-const { tryCatchWrapper } = require('../../middlewares/tryCatchWrapper');
+const {tryCatchWrapper} = require('../../middlewares/tryCatchWrapper');
+const {auth} = require('../../middlewares/auth');
 const { contactPostSchema, contactsPatchSchema } = require('../../schemas/contactSchema');
 
 const router = express.Router();
 
-router.get('/', tryCatchWrapper(getAllContacts));
+router.get('/', auth, tryCatchWrapper(getAllContacts));
 
 router.get('/:contactId', tryCatchWrapper(getContactById));
 
-router.post('/', contactPostSchema, tryCatchWrapper(addContact))
+router.post('/', auth, contactPostSchema, tryCatchWrapper(addContact))
 
 router.delete('/:contactId', tryCatchWrapper(deleteContact))
 
