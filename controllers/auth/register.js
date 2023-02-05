@@ -19,7 +19,6 @@ const register = async (req, res) => {
         message: "Created user",
         user: {
             email,
-            password,
             subscription,
         },
     })
