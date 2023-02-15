@@ -1,9 +1,7 @@
 const express = require('express');
 const { register, login, logout } = require('../../controllers');
-const { auth } = require('../../middlewares/auth');
 
-const { tryCatchWrapper } = require('../../middlewares/tryCatchWrapper');
-const { validation } = require('../../middlewares/validation');
+const { tryCatchWrapper, validation, auth } = require('../../middlewares');
 const { joiRegSchema, joiLogSchema } = require('../../schemas/userSchema');
 
 const router = express.Router();

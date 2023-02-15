@@ -1,8 +1,7 @@
 const express = require('express');
 
 const { getAllContacts, getContactById, addContact, deleteContact, updateContact, updateStatusContact } = require('../../controllers');
-const {tryCatchWrapper} = require('../../middlewares/tryCatchWrapper');
-const {auth} = require('../../middlewares/auth');
+const {tryCatchWrapper, auth} = require('../../middlewares');
 const { contactPostSchema, contactsPatchSchema } = require('../../schemas/contactSchema');
 
 const router = express.Router();
