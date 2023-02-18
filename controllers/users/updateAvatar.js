@@ -4,6 +4,7 @@ const { User } = require("../../db/userModel");
 const Jimp = require('jimp');
 
 const avatarsDir = path.join(__dirname, "../../", "public", "avatars");
+const { PORT = 3000} = process.env;
 
 const updateAvatar = async (req, res) => {
     const { path: tempUpload, originalname } = req.file;
@@ -13,7 +14,7 @@ const updateAvatar = async (req, res) => {
         const resultUpload = path.join(avatarsDir, imageName);
         await fs.rename(tempUpload, resultUpload);
 
-        const avatarURL = path.join("http://localhost:3000", "avatars", imageName);
+        const avatarURL = `http://localhost:${PORT}/avatars/${imageName}`;
         await User.findByIdAndUpdate(id, {avatarURL});
 
         Jimp.read(resultUpload, (error, image) => {
