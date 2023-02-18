@@ -13,5 +13,5 @@ email: Joi.string().email().required(),
 
 module.exports = {
     joiRegSchema,
-    joiLogSchema
+    joiLogSchema,
 };
