@@ -25,17 +25,15 @@ const userSchema = Schema({
         type: String,
         required: true,
       },
+      verify: {
+        type: Boolean,
+        default: false,
+      },
+      verificationToken: {
+        type: String,
+        required: [true, 'Verify token is required'],
+      },
 }, { versionKey: false, timestamps: true });
-
-// --------another version of hash password (with method)-------//
-
-// userSchema.methods.setPassword = function(password){
-//     this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-// }
-
-// userSchema.methods.comparePassword = function(password){
-//     return bcrypt.compareSync(password, this.password);
-// }
 
 const User = model("user", userSchema);
 

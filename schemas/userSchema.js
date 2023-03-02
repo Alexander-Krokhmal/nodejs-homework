@@ -11,7 +11,12 @@ password: Joi.string().required(),
 email: Joi.string().email().required(),
 });
 
+const userVerificationJoiSchema = Joi.object({
+  email: Joi.string().required(),
+});
+
 module.exports = {
     joiRegSchema,
     joiLogSchema,
+    userVerificationJoiSchema
 };
